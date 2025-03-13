@@ -1,0 +1,15 @@
+{
+  "auth": {
+    "confirmPhoneLabel": "Confirm phone number",
+    "confirmPhoneSubtitle": "Enter the confirmation code sent to the phone number {{phone}}",
+    "countDownOTP": "Resend OTP in {{time}}s",
+    "enterParentPhoneLabel": "Enter phone number",
+    "enterPassword": "Enter password",
+    "enterPasswordLabel": "Create password",
+    "enterPhone": "Enter phone number",
+    "forgotPassword": "Forgot password?",
+    "login": "Log in",
+    "logout": "Log out",
+    "confirmLogout": "Do you want to log out?"
+  }
+}

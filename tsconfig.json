@@ -1,0 +1,59 @@
+{
+  "compilerOptions": {
+    "allowJs": false,
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "jsx": "react-native",
+    "module": "es2015",
+    "moduleResolution": "node",
+    "strict": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "sourceMap": true,
+    "target": "esnext",
+    "lib": [
+      "esnext",
+      "dom"
+    ],
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "baseUrl": ".",
+    "paths": {
+      "@assets": ["app/assets"],
+      "@components": ["app/components"],
+      "@contexts": ["app/contexts"],
+      "@config": ["app/config"],
+      "@hooks": ["app/hooks"],
+      "@i18n": ["app/i18n"],
+      "@lib": ["app/lib"],
+      "@navigators": ["app/navigators"],
+      "@screens": ["app/screens"],
+      "@sdk": ["app/sdk"],
+      "@services": ["app/services"],
+      "@storage": ["app/storage"],
+      "@theme": ["app/theme"],
+      "@types": ["app/types"],
+      "@utils": ["app/utils"],
+      "@/*": ["./app/*"],
+    },
+    "typeRoots": [
+      "./node_modules/@types",
+      "./types"
+    ]
+  },
+  "extends": "expo/tsconfig.base",
+  "ts-node": {
+    "compilerOptions": {
+      "module": "commonjs"
+    }
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx"
+, "scripts/generate_locales.js"  ],
+  "exclude": [
+    "node_modules",
+    "test/**/*"
+  ]
+}
