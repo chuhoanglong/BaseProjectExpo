@@ -1,7 +1,7 @@
 build_android:
   only:
     variables:
-      - $CI_COMMIT_MESSAGE =~ /\[ci build\]/
+      - $CI_COMMIT_MESSAGE =~ /ci build/
   tags:
     - ANDROID
   stage: build
