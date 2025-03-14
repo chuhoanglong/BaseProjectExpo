@@ -1,0 +1,10 @@
+build_android:
+  only:
+    - $CI_COMMIT_MESSAGE =~ /\[ci build\]/
+  tags:
+    - ANDROID
+  stage: build
+  script:
+    - echo "Building Android"
+    - bun prebuild:clean -p android
+    - bundle exec fastlane android build_and_upload

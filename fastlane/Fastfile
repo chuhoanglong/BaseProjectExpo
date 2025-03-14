@@ -1,0 +1,95 @@
+before_all do
+	sh('security unlock-keychain -p "." login.keychain')
+	ENV["FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT"] = "120"
+	ENV["API_TOKEN_APPCENTER"] = "6f02d8806305182861857c2cfbd8cb639fad2a63"
+    ENV["OWNER_NAME_APPCENTER"] = "ct010122-actvn.edu.vn"
+    ENV["APP_NAME_IOS_APPCENTER"] = "Bitu-ios"
+    ENV["APP_NAME_ANDROID_APPCENTER"] = "Bitu-android"
+
+
+end
+
+platform :ios do
+  	# iOS Lanes
+	  desc 'Build IPA application and upload to App Center.'
+    lane :build_and_upload do
+        build
+        upload_appcenter
+    end
+
+    desc 'Build IPA application'
+    lane :build do
+		    update_code_signing_settings(path: "./apps/user/ios/SpokziStg.xcodeproj", use_automatic_signing: true, team_id: "3FM23GMCUF")
+        build_app(
+          workspace: "./apps/user/ios/SpokziStg.xcworkspace",
+          export_method: "development",
+          export_team_id: "3FM23GMCUF",
+          configuration: "Release",
+          scheme: "SpokziStg",
+          silent: true,
+          clean: true,
+          verbose: true,
+          export_options: { compileBitcode: false},
+          include_bitcode: false,
+          output_directory: "./", # Destination directory. Defaults to current directory.
+          output_name: "spokzi-release.ipa",       # specify the name of the .ipa file to generate (including file extension)
+		    )
+    end
+
+    desc 'Upload to App Center.'
+    lane :upload_appcenter do
+        branch_name = git_branch
+        commits = changelog_from_git_commits(commits_count: 5)
+        release_note = "Branch: " + branch_name + "\n\nNOTED: " + commits
+        appcenter_upload(
+            api_token: ENV["API_TOKEN_APPCENTER"],
+            owner_name: ENV["OWNER_NAME_APPCENTER"],
+            app_name: ENV["APP_NAME_IOS_APPCENTER"],
+            ipa: Dir.children("..").select { |f| f.include?(".ipa") }.last,
+            destinations: 'Staging',
+            release_notes: release_note,
+        )
+    end
+end
+
+platform :android do
+  # Android Lanes
+  desc 'Build APK application and upload to App Center.'
+  lane :build_and_upload do
+	  build
+	  upload_appcenter
+  end
+
+  desc 'Build APK application'
+  lane :build do
+	  puts("Android: Release")
+	  gradle(
+	  task: 'clean',
+	  project_dir: './android/'
+	  )
+	  build_task = "assemble" # default task build apk
+	  # if ENV['ENV_NAME'] == "Production" then build_task = "bundle" end
+	  gradle(
+	  task: build_task,
+	  build_type: 'Release',
+	  project_dir: './android/'
+	  )
+  end
+
+  desc 'Upload to App Center.'
+  lane :upload_appcenter do
+    branch_name = git_branch
+    commits = changelog_from_git_commits(commits_count: 5)
+    release_note = "Branch: " + branch_name + "\n\nNOTED: " + commits
+    appcenter_upload(
+      api_token: ENV["API_TOKEN_APPCENTER"],
+      owner_name: ENV["OWNER_NAME_APPCENTER"],
+      app_name: ENV["APP_NAME_ANDROID_APPCENTER"],
+      apk: Dir.children("..").select { |f| f.include?(".apk") }.last,
+      destinations: 'Staging',
+      release_notes: release_note,
+    )
+  end
+
+end
+
