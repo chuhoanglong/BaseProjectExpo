@@ -7,5 +7,6 @@ build_android:
   stage: build
   script:
     - echo "Building Android"
+    - bun install
     - bun prebuild:clean -p android
     - fastlane android build_and_upload
