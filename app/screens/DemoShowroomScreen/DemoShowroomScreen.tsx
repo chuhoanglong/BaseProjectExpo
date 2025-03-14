@@ -5,7 +5,6 @@ import { View, ViewStyle } from "react-native"
 import { DemoTabScreenProps } from "../../navigators/DemoNavigator"
 import { I18Text, Screen, Text } from "@components"
 import { AppImageSvg } from "@/components/ImageSvg"
-import ArrowLeft from "../../assets/svgs/arrow-left.svg"
 
 export const DemoShowroomScreen: FC<DemoTabScreenProps<"DemoShowroom">> =
   function DemoShowroomScreen(_props) {

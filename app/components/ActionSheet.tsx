@@ -1,9 +1,8 @@
 import { colors, typography } from "@theme"
 import { isEqual } from "lodash"
 import React from "react"
-import { Platform, StyleSheet, TouchableOpacity, View } from "react-native"
+import { Platform, StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import Modal from "react-native-modal"
-import { I18Text } from "./I18Text"
 
 export type OptionsT = string[]
 
@@ -51,7 +50,7 @@ const ActionSheet = ({
               onPress={() => onSelect(index)}
               disabled={index === descriptionIndex}
             >
-              <I18Text
+              <Text
                 style={[
                   styles.text,
                   index === destructiveButtonIndex && styles.destructiveText,
@@ -59,14 +58,14 @@ const ActionSheet = ({
                 ]}
               >
                 {option}
-              </I18Text>
+              </Text>
             </TouchableOpacity>
           )
         })}
       </View>
       <View style={styles.cancelContainer}>
         <TouchableOpacity style={styles.option} onPress={() => onSelect(cancelButtonIndex)}>
-          <I18Text style={[styles.text, styles.cancelText]}>{options[cancelButtonIndex]}</I18Text>
+          <Text style={[styles.text, styles.cancelText]}>{options[cancelButtonIndex]}</Text>
         </TouchableOpacity>
       </View>
     </Modal>
