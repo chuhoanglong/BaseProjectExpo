@@ -57,7 +57,7 @@ platform :android do
   desc 'Build APK application and upload to App Center.'
   lane :build_and_upload do
 	  build
-	  upload_appcenter
+	  # upload_appcenter
     slackNotification( 
       message: "New Android build available on branch: #{ENV['CI_COMMIT_BRANCH']}"
     )
@@ -105,8 +105,13 @@ lane :slackNotification do |options|
     'text' => message
   }
 
-  sh('curl -f -s -X POST ' + ENV['SLACK_NOTI'] +
-    ' -H "Content-Type: application/json"' +
-    ' -d \'' + payload.to_json + '\''
-  )
+  # log content payload to console
+  puts("payload: #{payload}")
+  # log url slack notification to console
+  puts("ENV['SLACK_NOTI']: #{ENV['SLACK_NOTI']}")
+
+  # sh('curl -f -s -X POST ' + ENV['SLACK_NOTI'] +
+  #   ' -H "Content-Type: application/json"' +
+  #   ' -d \'' + payload.to_json + '\''
+  # )
 end
