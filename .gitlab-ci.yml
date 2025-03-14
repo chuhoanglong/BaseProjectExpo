@@ -8,4 +8,4 @@ build_android:
   script:
     - echo "Building Android"
     - bun prebuild:clean -p android
-    - bundle exec fastlane android build_and_upload
+    - fastlane android build_and_upload
