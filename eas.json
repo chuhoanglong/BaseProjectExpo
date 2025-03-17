@@ -22,7 +22,8 @@
       "distribution": "internal",
       "ios": {
         "buildConfiguration": "Debug",
-        "simulator": false
+        "simulator": false,
+        "autoIncrement": "buildNumber"
       },
       "android": {
         "gradleCommand": ":app:assembleRelease",
