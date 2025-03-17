@@ -14,20 +14,20 @@ platform :ios do
 
     desc 'Build IPA application'
     lane :build do
-		    update_code_signing_settings(path: "./apps/user/ios/SpokziStg.xcodeproj", use_automatic_signing: true, team_id: "3FM23GMCUF")
+		    update_code_signing_settings(path: "./apps/user/ios/BaseProject.xcodeproj", use_automatic_signing: true, team_id: "3FM23GMCUF")
         build_app(
-          workspace: "./apps/user/ios/SpokziStg.xcworkspace",
+          workspace: "./apps/user/ios/BaseProject.xcworkspace",
           export_method: "development",
           export_team_id: "3FM23GMCUF",
           configuration: "Release",
-          scheme: "SpokziStg",
+          scheme: "BaseProject",
           silent: true,
           clean: true,
           verbose: true,
           export_options: { compileBitcode: false},
           include_bitcode: false,
           output_directory: "./", # Destination directory. Defaults to current directory.
-          output_name: "spokzi-release.ipa",       # specify the name of the .ipa file to generate (including file extension)
+          output_name: "BaseProject-release.ipa",       # specify the name of the .ipa file to generate (including file extension)
 		    )
     end
 
