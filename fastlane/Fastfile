@@ -1,11 +1,6 @@
 before_all do
 	sh('security unlock-keychain -p "." login.keychain')
 	ENV["FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT"] = "120"
-	ENV["API_TOKEN_APPCENTER"] = "6f02d8806305182861857c2cfbd8cb639fad2a63"
-    ENV["OWNER_NAME_APPCENTER"] = "ct010122-actvn.edu.vn"
-    ENV["APP_NAME_IOS_APPCENTER"] = "Bitu-ios"
-    ENV["APP_NAME_ANDROID_APPCENTER"] = "Bitu-android"
-
 
 end
 
